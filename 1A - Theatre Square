@@ -1,0 +1,17 @@
+#include <bits/stdc++.h>
+using namespace std;
+long long int n,m,a;
+int main() {
+    cin>>n>>m>>a;
+    long long int count = 0,row_num ;
+    if (m%a==0)
+        count =m/a;
+    else
+        count =m/a+1;
+    if (n%a==0)
+        row_num =n/a;
+    else
+        row_num =n/a+1;
+    cout<< count*row_num;
+    return 0;
+}
