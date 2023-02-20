@@ -1,0 +1,68 @@
+#include <bits/stdc++.h>
+#include <ctype.h>
+using namespace std;
+long long int n;
+string s,row,column,start;
+
+string intToAscii(int num) {
+    if (num == 0) {
+        return "0";
+    }
+
+    string result = "";
+    while (num > 0) {
+        char digit = '0' + (num % 10);
+        result = digit + result;
+        num /= 10;
+    }
+
+    return result;
+}
+
+int main() {
+    cin>>n;
+    while(n--){
+        start="";
+        row="";
+        column="";
+        cin>>s;
+
+        int i=0;
+        while(!isdigit(s[i])){
+            start+=s[i];
+            i++;
+        }
+        while (isdigit(s[i])){
+            row+=s[i];
+            i++;
+        }
+        if(i==s.length()) {//one number
+            long long int count =0;
+            for(int k=0;k<start.length();k++){
+                count+=pow(26,start.length()-k-1)*(int(start[k])-64);
+            }
+            cout << "R"<<row<<"C"<<count << "\n";
+        }else{//two numbers
+
+            i++;
+            while (isdigit(s[i])){
+                column+=s[i];
+                i++;
+            }
+            int num_column = stoi(column);
+            string d="";
+            while(num_column>26){
+                if(num_column%26!=0) {
+                    d = (char) (num_column % 26 + 64) + d;
+                    num_column = num_column / 26;
+                }else{
+                    d='Z'+d;
+                    num_column-=26;
+                    num_column = num_column / 26;
+                }
+            }
+            cout <<(char)(num_column+64)<<d<<row<<"\n";
+        }
+    }
+    return 0;
+}
